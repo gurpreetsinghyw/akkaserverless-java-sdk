@@ -16,7 +16,7 @@
 
 package com.akkaserverless.javasdk.action;
 
-import com.akkaserverless.javasdk.ComponentOptions;
+import com.akkaserverless.javasdk.impl.ComponentOptions;
 import com.akkaserverless.javasdk.PassivationStrategy;
 import com.akkaserverless.javasdk.eventsourcedentity.EventSourcedEntityOptions;
 import com.akkaserverless.javasdk.impl.action.ActionOptionsImpl;
