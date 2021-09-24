@@ -2,10 +2,10 @@
  * As long as this file exists it will not be re-generated.
  * You are free to make changes to this file.
  */
-package customer.view.customer_view
+package customer.view
 
 import com.akkaserverless.scalasdk.view.View.UpdateEffect
 import com.akkaserverless.scalasdk.view.ViewContext
-import customer.domain.customer_domain.CustomerState
+import customer.domain.CustomerState
 
-class CustomersResponseByNameView(context: ViewContext) extends AbstractCustomersResponseByNameView {}
+class CustomerSummaryByNameView(context: ViewContext) extends AbstractCustomerSummaryByNameView {}
