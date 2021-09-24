@@ -18,13 +18,15 @@ object Main {
     // and is kept up-to-date with any changes in your protobuf definitions.
     // If you prefer, you may remove this and manually register these components in a
     // `AkkaServerless()` instance.
-    AkkaServerlessFactory.withComponents(
-      new CustomerValueEntity(_),
-      new CustomerActionImpl(_),
-      new CustomerByEmailView(_),
-      new CustomerByNameView(_),
-      new CustomerSummaryByNameView(_),
-      new CustomersResponseByNameView(_))
+    AkkaServerlessFactory
+      .withComponents(
+        new CustomerValueEntity(_),
+        new CustomerActionImpl(_),
+        new CustomerByEmailView(_),
+        new CustomerByNameView(_),
+        new CustomerSummaryByNameView(_),
+        new CustomersResponseByNameView(_))
+      .preferScalaProtobufs
   }
 
   def main(args: Array[String]): Unit = {

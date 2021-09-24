@@ -85,7 +85,7 @@ private[scalasdk] class JavaValueEntityOptionsAdapter(scalasdkValueEntityOptions
       scalasdkValueEntityOptions.withForwardHeaders(immutable.Set.from(headers.asScala)))
 
   def passivationStrategy(): javasdk.PassivationStrategy =
-    new JavaPassivationStrategyAdapter(scalasdkValueEntityOptions.passivationStrategy)
+    javasdk.PassivationStrategy.defaultTimeout() // FIXME
 
   def withPassivationStrategy(
       passivationStrategy: javasdk.PassivationStrategy): javasdk.valueentity.ValueEntityOptions =
@@ -121,8 +121,9 @@ private[scalasdk] class ScalaValueEntityContextAdapter(javasdkContext: javasdk.v
     ScalaServiceCallFactoryAdapter(javasdkContext.serviceCallFactory())
 }
 
-private[scalasdk] class JavaPassivationStrategyAdapter(scalasdkPassivationStrategy: PassivationStrategy)
-    extends javasdk.PassivationStrategy {
-  def defaultTimeout() = scalasdkPassivationStrategy.defaultTimeout
-  def timeout(duration: java.time.Duration) = scalasdkPassivationStrategy.timeout(duration.toScala)
-}
+// FIXME
+//private[scalasdk] class JavaPassivationStrategyAdapter(scalasdkPassivationStrategy: PassivationStrategy)
+//    extends javasdk.PassivationStrategy {
+//  def defaultTimeout() = scalasdkPassivationStrategy.defaultTimeout
+//  def timeout(duration: java.time.Duration) = scalasdkPassivationStrategy.timeout(duration.toScala)
+//}

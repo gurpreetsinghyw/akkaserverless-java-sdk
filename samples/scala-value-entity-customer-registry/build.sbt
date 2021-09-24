@@ -2,9 +2,7 @@ name := "customer-registry"
 
 organization := "com.akkaseverless.samples"
 organizationHomepage := Some(url("https://akkaserverless.com"))
-licenses := Seq(
-  ("CC0", url("https://creativecommons.org/publicdomain/zero/1.0"))
-)
+licenses := Seq(("CC0", url("https://creativecommons.org/publicdomain/zero/1.0")))
 
 scalaVersion := "2.13.6"
 
@@ -16,12 +14,8 @@ Compile / scalacOptions ++= Seq(
   "-feature",
   "-unchecked",
   "-Xlog-reflective-calls",
-  "-Xlint"
-)
-Compile / javacOptions ++= Seq(
-  "-Xlint:unchecked",
-  "-Xlint:deprecation",
-  "-parameters" // for Jackson
+  "-Xlint")
+Compile / javacOptions ++= Seq("-Xlint:unchecked", "-Xlint:deprecation", "-parameters" // for Jackson
 )
 
 Test / parallelExecution := false
@@ -30,3 +24,9 @@ Test / logBuffered := false
 
 run / fork := false
 Global / cancelable := false // ctrl-c
+
+// FIXME include logback dependency via sdk instead
+libraryDependencies ++= Seq(
+  "ch.qos.logback" % "logback-classic" % "1.2.3",
+  "ch.qos.logback.contrib" % "logback-json-classic" % "0.1.5",
+  "ch.qos.logback.contrib" % "logback-jackson" % "0.1.5")
