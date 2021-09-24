@@ -1,12 +1,12 @@
 package customer
 
 import com.akkaserverless.scalasdk.AkkaServerless
-import customer.action.customer_action.CustomerActionImpl
-import customer.domain.customer_domain.CustomerValueEntity
-import customer.view.customer_view.CustomerByEmailView
-import customer.view.customer_view.CustomerByNameView
-import customer.view.customer_view.CustomerSummaryByNameView
-import customer.view.customer_view.CustomersResponseByNameView
+import customer.action.CustomerActionImpl
+import customer.domain.CustomerValueEntity
+import customer.view.CustomerByEmailView
+import customer.view.CustomerByNameView
+import customer.view.CustomerSummaryByNameView
+import customer.view.CustomersResponseByNameView
 import org.slf4j.LoggerFactory
 
 object Main {

@@ -3,58 +3,56 @@
  * You are free to make changes to this file.
  */
 
-package customer.domain.customer_domain
+package customer.domain
 
 import com.akkaserverless.scalasdk.valueentity.ValueEntity
 import com.akkaserverless.scalasdk.valueentity.ValueEntityContext
 import com.google.protobuf.empty.Empty
-import customer.api.customer_api
+import customer.api
 
 /** A value entity. */
 class CustomerValueEntity(context: ValueEntityContext) extends AbstractCustomerValueEntity {
 
   override def emptyState: CustomerState = CustomerState()
 
-  override def create(currentState: CustomerState, command: customer_api.Customer): ValueEntity.Effect[Empty] = {
+  override def create(currentState: CustomerState, command: api.Customer): ValueEntity.Effect[Empty] = {
     val state = convertToDomain(command)
     effects.updateState(state).thenReply(Empty())
   }
 
-  override def changeName(
-      currentState: CustomerState,
-      command: customer_api.ChangeNameRequest): ValueEntity.Effect[Empty] = {
+  override def changeName(currentState: CustomerState, command: api.ChangeNameRequest): ValueEntity.Effect[Empty] = {
     val updatedState = currentState.copy(name = command.newName)
     effects.updateState(updatedState).thenReply(Empty())
   }
 
   override def changeAddress(
       currentState: CustomerState,
-      command: customer_api.ChangeAddressRequest): ValueEntity.Effect[Empty] = {
+      command: api.ChangeAddressRequest): ValueEntity.Effect[Empty] = {
     val updatedState = currentState.copy(address = command.newAddress.map(convertAddressToDomain))
     effects.updateState(updatedState).thenReply(Empty())
   }
 
   override def getCustomer(
       currentState: CustomerState,
-      command: customer_api.GetCustomerRequest): ValueEntity.Effect[customer_api.Customer] =
+      command: api.GetCustomerRequest): ValueEntity.Effect[api.Customer] =
     effects.reply(convertToApi(currentState))
 
-  private def convertToDomain(customer: customer_api.Customer) =
+  private def convertToDomain(customer: api.Customer) =
     CustomerState(
       customerId = customer.customerId,
       email = customer.email,
       name = customer.name,
       address = customer.address.map(convertAddressToDomain))
 
-  private def convertAddressToDomain(address: customer_api.Address) = {
+  private def convertAddressToDomain(address: api.Address) = {
     Address(street = address.street, city = address.city)
   }
 
   private def convertToApi(state: CustomerState) =
-    customer_api.Customer(
+    api.Customer(
       customerId = state.customerId,
       email = state.email,
       name = state.name,
-      address = state.address.map(address => customer_api.Address(street = address.street, city = address.city)))
+      address = state.address.map(address => api.Address(street = address.street, city = address.city)))
 
 }
