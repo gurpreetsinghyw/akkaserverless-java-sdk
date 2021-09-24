@@ -19,6 +19,12 @@ package customer.api;
 import "google/protobuf/empty.proto";
 import "akkaserverless/annotations.proto";
 
+import "scalapb/scalapb.proto";
+
+option (scalapb.options) = {
+  flat_package: true
+};
+
 message Customer {
   string customer_id = 1 [(akkaserverless.field).entity_key = true];
   string email = 2;
