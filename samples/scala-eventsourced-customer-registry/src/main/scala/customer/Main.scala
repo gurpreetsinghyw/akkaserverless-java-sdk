@@ -2,6 +2,7 @@ package customer
 
 import com.akkaserverless.scalasdk.AkkaServerless
 import customer.domain.CustomerEntity
+import customer.view.CustomerByCityStreamingView
 import customer.view.CustomerByNameView
 import org.slf4j.LoggerFactory
 
@@ -13,6 +14,9 @@ object Main {
   def createAkkaServerless(): AkkaServerless = {
     AkkaServerlessFactory.withComponents(
       new CustomerEntity(_),
+      // end::register[]
+      new CustomerByCityStreamingView(_),
+      // tag::register[]
       new CustomerByNameView(_))
   }
   // end::register[]

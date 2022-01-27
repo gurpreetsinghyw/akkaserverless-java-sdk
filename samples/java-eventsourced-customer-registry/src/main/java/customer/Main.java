@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import customer.domain.CustomerEntity;
 import customer.view.CustomerByNameView;
+import customer.view.CustomerByCityStreamingView;
 
 public final class Main {
 
@@ -19,6 +20,9 @@ public final class Main {
   public static AkkaServerless createAkkaServerless() {
     return AkkaServerlessFactory.withComponents(
       CustomerEntity::new,
+      // end::register[]
+      CustomerByCityStreamingView::new,
+      // tag::register[]
       CustomerByNameView::new);
   }
   // end::register[]
